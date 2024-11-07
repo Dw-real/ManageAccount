@@ -1,0 +1,17 @@
+.top-right-links {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.top-right-links span {
+    font-size: 1.00em;
+    margin-left: 20px;
+    cursor: pointer;
+    color: lightgray;
+}
+
+.top-right-links span:hover {
+    text-decoration: underline;
+    color: aqua;
+}

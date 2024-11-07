@@ -1,0 +1,54 @@
+/* 입력 필드와 버튼을 가로로 배치 */
+#search-user > div {
+    width: 100%;
+}
+
+/* 입력 필드 크기 증가 */
+#userId {
+    padding: 12px;
+    font-size: 18px;
+    width: 60%; /* 버튼 크기 공간을 남기기 위해 너비를 80%로 설정 */
+    margin-right: 10px; /* 버튼과 간격 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#userName {
+    padding: 12px;
+    font-size: 15px;
+    width: 30%;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#userPhoneNumber {
+    padding: 12px;
+    font-size: 15px;
+    width: 30%;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#findUserIdBtn {
+    padding: 12px 12px;
+    font-size: 18px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 20%;
+}
+
+#findUserPwdBtn {
+    padding: 12px 12px;
+    font-size: 18px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 20%; /* 버튼 너비를 20%로 설정 */
+}
