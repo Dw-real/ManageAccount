@@ -41,6 +41,7 @@ p {
     margin-top: 5px;
     text-align: left; /* 안내 텍스트는 왼쪽 정렬 */
 }
+
 /* 버튼 스타일 */
 button[type="submit"] {
     padding: 12px;

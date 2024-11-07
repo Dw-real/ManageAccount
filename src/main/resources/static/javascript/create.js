@@ -1,7 +1,6 @@
 function checkId() {
     const id = document.getElementById("id").value;
     const checkResult = document.getElementById("check-result");
-    console.log(id + "\n");
 
     // 아이디를 입력하지 않은 경우
     if (!id) {

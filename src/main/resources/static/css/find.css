@@ -13,8 +13,36 @@
     border-radius: 4px;
 }
 
-/* 버튼 크기 증가 */
-#findUserBtn {
+#userName {
+    padding: 12px;
+    font-size: 15px;
+    width: 30%;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#userPhoneNumber {
+    padding: 12px;
+    font-size: 15px;
+    width: 30%;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#findUserIdBtn {
+    padding: 12px 12px;
+    font-size: 18px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 20%;
+}
+
+#findUserPwdBtn {
     padding: 12px 12px;
     font-size: 18px;
     background-color: #007BFF;
