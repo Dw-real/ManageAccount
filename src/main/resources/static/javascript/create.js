@@ -30,3 +30,54 @@ function checkId() {
         }
     });
 }
+
+$(document).ready(function(){
+    $('#createAccountForm').on('submit', function(event) {
+        event.preventDefault();
+
+        const name = $('#name').val();
+        const id = $('#id').val();
+        const pwd = $('#pwd').val();
+        const pwdCheck = $('#pwdCheck').val();
+        const birthDate = $('#birthDate').val();
+        const gender = $('#gender').val();
+        const phoneNumber = $('#phoneNumber').val();
+        const email = $('#email').val();
+
+        // 비밀번호 확인
+        if (pwd !== pwdCheck) {
+            alert("비밀번호가 일치하지 않습니다.");
+            return;
+        }
+
+        if ($('#check-result').text() !== '사용 가능한 아이디입니다.') {
+            alert("아이디 중복 확인을 해주세요");
+            return;
+        }
+
+        const formData = {
+            name: name,
+            id: id,
+            pwd: pwd,
+            birthDate: birthDate,
+            gender: gender,
+            phoneNumber: phoneNumber,
+            email:email
+        };
+
+        $.ajax({
+            type: 'post',
+            url: '/accounts',
+            contentType:'application/json',
+            data:JSON.stringify(formData),
+            success: function(response) {
+                alert("계정이 생성되었습니다!");
+                location.href = "../html/home.html";
+            },
+            error: function(error) {
+                alert("계정 생성에 실패했습니다");
+                return;
+            }
+        });
+    });
+});
