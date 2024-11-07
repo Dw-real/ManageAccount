@@ -44,6 +44,23 @@ public class DatabaseUserRepository implements UserRepository {
         return user;
     }
 
+    public User checkId(String id) {
+        SqlParameterSource namedParameter = new MapSqlParameterSource("id", id);
+        User user = null;
+
+        try {
+            user = namedParameterJdbcTemplate.queryForObject(
+                    "SELECT * FROM USER WHERE id=:id",
+                    namedParameter,
+                    new BeanPropertyRowMapper<>(User.class)
+            );
+        } catch(EmptyResultDataAccessException exception) {
+
+        }
+
+        return user;
+    }
+
     public User findById(String id) {
         SqlParameterSource namedParameter = new MapSqlParameterSource("id", id);
         User user = null;

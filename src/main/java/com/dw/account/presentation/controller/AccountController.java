@@ -17,6 +17,11 @@ public class AccountController {
         this.accountService = accountService;
     }
 
+    @RequestMapping(value = "/accounts/id-check", method = RequestMethod.POST)
+    public @ResponseBody String idCheck(@RequestParam("id") String id) {
+        return accountService.checkId(id);
+    }
+
     @RequestMapping(value = "/accounts", method = RequestMethod.POST)
     public UserDto createAccount(@Valid @RequestBody UserDto userDto) {
         return accountService.register(userDto);

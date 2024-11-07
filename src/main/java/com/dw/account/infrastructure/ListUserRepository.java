@@ -29,6 +29,13 @@ public class ListUserRepository implements UserRepository {
         return user;
     }
 
+    public User checkId(String id) {
+        return users.stream()
+                .filter(user -> user.sameId(id))
+                .findFirst()
+                .orElse(null); // 해당 id가 없으면 null 반환
+    }
+
     public User findById(String id) {
         return users.stream()
                 .filter(user -> user.sameId(id))

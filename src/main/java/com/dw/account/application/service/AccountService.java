@@ -31,8 +31,23 @@ public class AccountService {
         return savedUserDto;
     }
 
+    public String checkId(String id) {
+        User user = userRepository.checkId(id);
+
+        if (user == null) {
+            return "ok";
+        } else {
+            return "no";
+        }
+    }
+
     public UserDto findById(String id) {
         User user = userRepository.findById(id);
+
+        if (user == null) {
+            return null;
+        }
+
         // Dto 변환
         UserDto userDto = UserDto.toDto(user);
         // Dto 리턴
