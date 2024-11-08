@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/login.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
-
+    <div id="logIn">
+        <h2>로그인</h2>
+        <input type="text" id="userId" placeholder="5~15자 사이">
+        <input type="password" id="userPwd" placeholder="4~15자 사이">
+        <button id="logInBtn" onclick="logIn()">로그인</button>
+        <p id="inputNotice"></p>
+    </div>
+<script src="../javascript/login.js"></script>
 </body>
 </html>

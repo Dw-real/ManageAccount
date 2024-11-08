@@ -1,7 +1,9 @@
 package com.dw.account.application.service;
 
 import com.dw.account.domain.User;
+import com.dw.account.domain.exception.InvalidPassWordException;
 import com.dw.account.domain.repository.UserRepository;
+import com.dw.account.presentation.dto.LoginDto;
 import com.dw.account.presentation.dto.UserDto;
 import com.dw.account.presentation.dto.UserIdDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,14 @@ public class AccountService {
     public AccountService(UserRepository userRepository, ValidationService validationService) {
         this.userRepository = userRepository;
         this.validationService = validationService;
+    }
+
+    public void logIn(LoginDto loginDto) {
+        User user = userRepository.findById(loginDto.getId());
+
+        if (!user.samePwd(loginDto.getPwd())) {
+            throw new InvalidPassWordException("비밀번호가 일치하지 않습니다.");
+        }
     }
 
     public UserDto register(UserDto userDto) {

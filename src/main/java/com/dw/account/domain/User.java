@@ -87,6 +87,10 @@ public class User {
         return this.id.equals(id);
     }
 
+    public Boolean samePwd(String pwd) {
+        return this.pwd.equals(pwd);
+    }
+
     public Boolean sameInfo(String name, String phoneNumber) {
         return (this.name.equals(name) && this.phoneNumber.equals(phoneNumber));
     }

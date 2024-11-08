@@ -1,10 +1,16 @@
 package com.dw.account.presentation.controller;
 
 import com.dw.account.application.service.AccountService;
+import com.dw.account.domain.User;
+import com.dw.account.domain.exception.IdNotFoundException;
+import com.dw.account.domain.exception.InvalidPassWordException;
+import com.dw.account.presentation.dto.LoginDto;
 import com.dw.account.presentation.dto.UserDto;
 import com.dw.account.presentation.dto.UserIdDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +21,17 @@ public class AccountController {
     @Autowired
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
+    }
+
+    @RequestMapping(value = "/accounts/login", method = RequestMethod.POST)
+    public ResponseEntity<?> logIn(@Valid @RequestBody LoginDto loginDto) {
+        try {
+            accountService.logIn(loginDto);
+            UserDto userDto = accountService.findById(loginDto.getId());
+            return ResponseEntity.ok(userDto);
+        } catch(IdNotFoundException | InvalidPassWordException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+        }
     }
 
     @RequestMapping(value = "/accounts/id-check", method = RequestMethod.POST)
