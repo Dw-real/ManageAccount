@@ -4,6 +4,7 @@ import com.dw.account.application.service.AccountService;
 import com.dw.account.domain.User;
 import com.dw.account.domain.exception.IdNotFoundException;
 import com.dw.account.domain.exception.InvalidPassWordException;
+import com.dw.account.domain.exception.LoginException;
 import com.dw.account.presentation.dto.LoginDto;
 import com.dw.account.presentation.dto.PwdUpdateDto;
 import com.dw.account.presentation.dto.UserDto;
@@ -26,13 +27,9 @@ public class AccountController {
 
     @RequestMapping(value = "/accounts/login", method = RequestMethod.POST)
     public ResponseEntity<?> logIn(@Valid @RequestBody LoginDto loginDto) {
-        try {
-            accountService.logIn(loginDto);
-            UserDto userDto = accountService.findById(loginDto.getId());
-            return ResponseEntity.ok(userDto);
-        } catch(IdNotFoundException | InvalidPassWordException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
-        }
+        accountService.logIn(loginDto);
+        UserDto userDto = accountService.findById(loginDto.getId());
+        return ResponseEntity.ok(userDto);
     }
 
     @RequestMapping(value = "/accounts/id-check", method = RequestMethod.POST)

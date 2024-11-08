@@ -21,13 +21,13 @@ function findUserId() {
                 alert("회원 정보를 가져오는 중 예상치 못한 문제가 발생했습니다.");
             }
         },
-        error: function(error) {
-            if (error.status == 404) {
-                alert("해당 정보로 가입된 id가 없습니다.");
-                return;
-            }
-            else {
-                alert("오류가 발생했습니다.");
+        error: function(xhr, status, error) {
+            try {
+                // 서버에서 반환된 오류 메시지를 추출하여 alert로 표시
+                const errorResponse = JSON.parse(xhr.responseText);
+                alert(errorResponse.errors.join("\n"));
+            } catch (e) {
+                alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
             }
         }
     });
@@ -55,13 +55,13 @@ function findUserPwd() {
                 alert("회원 정보를 가져오는 중 예상치 못한 문제가 발생했습니다.");
             }
         },
-        error: function(error) {
-            if (error.status == 404) {
-                alert(error.message);
-                return;
-            }
-            else {
-                alert("오류가 발생했습니다.");
+        error: function(xhr, status, error) {
+            try {
+                // 서버에서 반환된 오류 메시지를 추출하여 alert로 표시
+                const errorResponse = JSON.parse(xhr.responseText);
+                alert(errorResponse.errors.join("\n"));
+            } catch (e) {
+                alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
             }
         }
     });

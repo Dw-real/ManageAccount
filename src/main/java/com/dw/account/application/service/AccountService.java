@@ -1,7 +1,9 @@
 package com.dw.account.application.service;
 
 import com.dw.account.domain.User;
+import com.dw.account.domain.exception.IdNotFoundException;
 import com.dw.account.domain.exception.InvalidPassWordException;
+import com.dw.account.domain.exception.LoginException;
 import com.dw.account.domain.repository.UserRepository;
 import com.dw.account.presentation.dto.LoginDto;
 import com.dw.account.presentation.dto.UserDto;
@@ -24,8 +26,13 @@ public class AccountService {
     public void logIn(LoginDto loginDto) {
         User user = userRepository.findById(loginDto.getId());
 
+        // ID가 존재하지 않으면 IdNotFoundException을 던지기
+        if (user == null) {
+            throw new IdNotFoundException("현재 ID로 등록된 아이디가 없습니다.");
+        }
+
         if (!user.samePwd(loginDto.getPwd())) {
-            throw new InvalidPassWordException("비밀번호가 일치하지 않습니다.");
+            throw new LoginException("비밀번호가 일치하지 않습니다.");
         }
     }
 

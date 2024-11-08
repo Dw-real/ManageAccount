@@ -24,11 +24,13 @@ function logIn() {
             sessionStorage.setItem('userId', response.id);
             location.href = "../html/home.html";
         },
-        error: function(error) {
-            console.log("로그인 실패");
-            if (error.status == 400 || error.status == 401) {
-                alert(error.message);
-                return;
+        error: function(xhr, status, error) {
+            try {
+                // 서버에서 반환된 오류 메시지를 추출하여 alert로 표시
+                const errorResponse = JSON.parse(xhr.responseText);
+                alert(errorResponse.errors.join("\n"));
+            } catch (e) {
+                alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
             }
         }
     });

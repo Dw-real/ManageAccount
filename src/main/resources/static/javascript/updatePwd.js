@@ -23,6 +23,7 @@ function updatePwd() {
             newPwd: newPwd
         }),
         success: function(response) {
+            alert("비밀번호가 변경되었습니다.");
             location.href ="../html/home.html";
         },
         error: function(error) {

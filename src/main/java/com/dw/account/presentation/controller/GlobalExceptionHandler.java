@@ -1,7 +1,6 @@
 package com.dw.account.presentation.controller;
 
-import com.dw.account.domain.exception.IdNotFoundException;
-import com.dw.account.domain.exception.InfoNotFoundException;
+import com.dw.account.domain.exception.*;
 import com.dw.account.presentation.ErrorMessage;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -36,19 +35,40 @@ public class GlobalExceptionHandler {
         return new ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler({MethodArgumentNotValidException.class, DuplicateIdException.class, InvalidPassWordException.class})
     public ResponseEntity<ErrorMessage> handleMethodArgumentNotValidException(
-            MethodArgumentNotValidException ex
+           Exception ex
     ) {
-        List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
-        List<String> errors = fieldErrors.stream()
-                .map(
-                        fieldError ->
-                                fieldError.getField() + ", " + fieldError.getDefaultMessage()
-                ).toList();
+        List<String> errors = new ArrayList<>();
+        if (ex instanceof MethodArgumentNotValidException) {
+            MethodArgumentNotValidException methodEx = (MethodArgumentNotValidException) ex;
+            List<FieldError> fieldErrors = methodEx.getBindingResult().getFieldErrors();
+            errors = fieldErrors.stream()
+                    .map(
+                            fieldError ->
+                                    fieldError.getField() + ", " + fieldError.getDefaultMessage()
+                    ).toList();
+        }
+        else if (ex instanceof DuplicateIdException) {
+            errors.add(ex.getMessage());
+        }
+        else if (ex instanceof InvalidPassWordException) {
+            errors.add(ex.getMessage());
+        }
 
         ErrorMessage errorMessage = new ErrorMessage(errors);
         return new ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(LoginException.class)
+    public ResponseEntity<ErrorMessage> handleLoginException(
+            LoginException ex
+    ) {
+        List<String> errors = new ArrayList<>();
+        errors.add(ex.getMessage());
+
+        ErrorMessage errorMessage = new ErrorMessage(errors);
+        return new ResponseEntity<>(errorMessage, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(IdNotFoundException.class)

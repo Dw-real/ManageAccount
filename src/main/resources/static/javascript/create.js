@@ -49,10 +49,10 @@ $(document).ready(function(){
             return;
         }
 
-        if ($('#check-result').text() !== '사용 가능한 아이디입니다.') {
-            alert("아이디 중복 확인을 해주세요");
-            return;
-        }
+//        if ($('#check-result').text() !== '사용 가능한 아이디입니다.') {
+//            alert("아이디 중복 확인을 해주세요");
+//            return;
+//        }
 
         $.ajax({
             type: 'post',
@@ -71,9 +71,16 @@ $(document).ready(function(){
                 alert("계정이 생성되었습니다!");
                 location.href = "../html/home.html";
             },
-            error: function(error) {
-                alert("계정 생성에 실패했습니다");
-                return;
+            error: function(xhr, status, error) {
+                try {
+                    // 서버에서 반환된 오류 메시지를 추출하여 alert로 표시
+                    const errorResponse = JSON.parse(xhr.responseText);
+                    alert(errorResponse.errors.join("\n"));
+                } catch (e) {
+                    alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+                }
+                checkResult.style.color = "red";
+                checkResult.textContent = "서버 오류가 발생했습니다. 다시 시도해주세요.";
             }
         });
     });
