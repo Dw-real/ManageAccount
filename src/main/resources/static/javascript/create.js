@@ -54,21 +54,19 @@ $(document).ready(function(){
             return;
         }
 
-        const formData = {
-            name: name,
-            id: id,
-            pwd: pwd,
-            birthDate: birthDate,
-            gender: gender,
-            phoneNumber: phoneNumber,
-            email:email
-        };
-
         $.ajax({
             type: 'post',
             url: '/accounts',
             contentType:'application/json',
-            data:JSON.stringify(formData),
+            data: JSON.stringify({
+                name: name,
+                id: id,
+                pwd: pwd,
+                birthDate: birthDate,
+                gender: gender,
+                phoneNumber: phoneNumber,
+                email:email
+            }),
             success: function(response) {
                 alert("계정이 생성되었습니다!");
                 location.href = "../html/home.html";
