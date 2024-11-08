@@ -5,6 +5,7 @@ import com.dw.account.domain.User;
 import com.dw.account.domain.exception.IdNotFoundException;
 import com.dw.account.domain.exception.InvalidPassWordException;
 import com.dw.account.presentation.dto.LoginDto;
+import com.dw.account.presentation.dto.PwdUpdateDto;
 import com.dw.account.presentation.dto.UserDto;
 import com.dw.account.presentation.dto.UserIdDto;
 import jakarta.validation.Valid;
@@ -55,8 +56,8 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/accounts/{id}", method = RequestMethod.PATCH)
-    public UserDto updatePassword(@PathVariable String id, @RequestBody UserDto userDto) {
-        return accountService.updatePwd(id, userDto.getPwd());
+    public UserDto updatePassword(@PathVariable String id, @RequestBody PwdUpdateDto pwdUpdateDto) {
+        return accountService.updatePwd(id, pwdUpdateDto.getCurrentPwd(), pwdUpdateDto.getNewPwd());
     }
 
     @RequestMapping(value = "/accounts/{id}", method = RequestMethod.DELETE)

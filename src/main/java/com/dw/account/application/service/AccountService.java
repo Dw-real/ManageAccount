@@ -70,9 +70,12 @@ public class AccountService {
         return userIdDto;
     }
 
-    public UserDto updatePwd(String id, String pwd) {
+    public UserDto updatePwd(String id, String pwd, String newPwd) {
         User user = userRepository.findById(id);
-        User updatedUser = userRepository.update(user, pwd);
+        if (!user.samePwd(pwd)) {
+            throw new InvalidPassWordException("현재 비밀번호가 일치하지 않습니다.");
+        }
+        User updatedUser = userRepository.update(user, newPwd);
         UserDto userDto = UserDto.toDto(updatedUser);
         return userDto;
     }
