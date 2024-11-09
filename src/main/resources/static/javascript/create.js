@@ -49,11 +49,6 @@ $(document).ready(function(){
             return;
         }
 
-//        if ($('#check-result').text() !== '사용 가능한 아이디입니다.') {
-//            alert("아이디 중복 확인을 해주세요");
-//            return;
-//        }
-
         $.ajax({
             type: 'post',
             url: '/accounts',

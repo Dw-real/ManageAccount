@@ -8,10 +8,10 @@ public class User {
     @Size(min = 2, max = 50)
     private String name;
 
-    @Size(min = 5, max = 15)
+    @Size(min = 5, max = 15, message = "아이디는 최소 5자 이상, 최대 15자 이하로 설정해주세요")
     private String id;
 
-    @Size(min = 4, max = 15)
+    @Size(min = 4, max = 15, message = "비밀번호는 최소 4자 이상, 최대 15자 이하로 설정해주세요")
     private String pwd;
 
     @Pattern(regexp = "\\d{8}", message = "생년월일은 YYYYMMDD 형식이어야 합니다.")

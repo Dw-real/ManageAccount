@@ -25,11 +25,7 @@ public class GlobalExceptionHandler {
     ) {
         Set<ConstraintViolation<?>> constraintViolations = ex.getConstraintViolations();
         List<String> errors = constraintViolations.stream()
-                .map(
-                        constraintViolation ->
-                                extractField(constraintViolation.getPropertyPath()) + ", " +
-                                        constraintViolation.getMessage()
-                ).toList();
+                .map(constraintViolation ->constraintViolation.getMessage()).toList();
 
         ErrorMessage errorMessage = new ErrorMessage(errors);
         return new ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST);
@@ -44,10 +40,7 @@ public class GlobalExceptionHandler {
             MethodArgumentNotValidException methodEx = (MethodArgumentNotValidException) ex;
             List<FieldError> fieldErrors = methodEx.getBindingResult().getFieldErrors();
             errors = fieldErrors.stream()
-                    .map(
-                            fieldError ->
-                                    fieldError.getField() + ", " + fieldError.getDefaultMessage()
-                    ).toList();
+                    .map(fieldError -> fieldError.getDefaultMessage()).toList();
         }
         else if (ex instanceof DuplicateIdException) {
             errors.add(ex.getMessage());
