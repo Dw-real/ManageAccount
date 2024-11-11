@@ -11,7 +11,7 @@ function checkId() {
 
     // AJAX 요청
     $.ajax({
-        type: "post",
+        type: "GET",
         url: "/accounts/id-check",  // URL 파라미터로 id 전달
         data: {id: id},  // 데이터를 URL 파라미터로 보냄
         success: function(response) {
