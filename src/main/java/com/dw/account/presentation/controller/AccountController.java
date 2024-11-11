@@ -32,7 +32,7 @@ public class AccountController {
         return ResponseEntity.ok(userDto);
     }
 
-    @RequestMapping(value = "/accounts/id-check", method = RequestMethod.POST)
+    @RequestMapping(value = "/accounts/id-check", method = RequestMethod.GET)
     public @ResponseBody String idCheck(@RequestParam("id") String id) {
         return accountService.checkId(id);
     }
